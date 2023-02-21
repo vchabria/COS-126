@@ -1,0 +1,70 @@
+/******************************************************************************
+ *  Name: Varnika Chabria
+ *  NetID:
+ *  Precept:
+ *
+ *  Description:
+ *
+ ******************************************************************************/
+
+
+
+10: 7F01   R[F] <- 0001                  
+11: 8AFF   read R[A]                      read A
+12: 17AF   R[7] <- R[A] + R[F]            R7 = A + F
+13: C738   if (R[7] == 0) goto 38         if(R7 == 0) go to 38
+
+
+14: 8BFF   read R[B]                      read B
+15: 8CFF   read R[C]                      read C
+16: 8DFF   read R[D]                      read D
+17: 81FF   read R[1]                      read 1
+18: 82FF   read R[2]                      read 2
+19: 83FF   read R[3]                      read 3
+
+
+1A: 44AB   R[4] <- R[A] ^ R[B]            checking p1 = R4
+1B: 444D   R[4] <- R[4] ^ R[D]           
+1C: 4441   R[4] <- R[4] ^ R[1]           
+
+1D: 45AC   R[5] <- R[A] ^ R[C]            checking p2 = R5
+1E: 455D   R[5] <- R[5] ^ R[D]           
+1F: 4552   R[5] <- R[5] ^ R[2]           
+
+20: 46BC   R[6] <- R[B] ^ R[C]            checking p3 = R6
+21: 466D   R[6] <- R[6] ^ R[D]           
+22: 4663   R[6] <- R[6] ^ R[3]           
+
+23: 3145   R[1] <- R[4] & R[5]            checking for individual fails
+24: 3246   R[2] <- R[4] & R[6]           
+25: 3356   R[3] <- R[5] & R[6]            
+
+26: 3412   R[4] <- R[1] & R[2]            checking for all fails
+27: 3443   R[4] <- R[4] & R[3]            
+
+
+
+28: C42B   if (R[4] == 0) goto 2B         if(4 == 0) go to 2B
+29: 4DDF   R[D] <- R[D] ^ R[F]            D = D ^ F
+2A: C033   goto 33                        if (R0 = 0) go to 33
+
+2B: C12E   if (R[1] == 0) goto 2E         if(1 == 0) go to 2E
+2C: 4AAF   R[A] <- R[A] ^ R[F]            A = A ^ F
+2D: C033   goto 33                        if(R0 = 0) go to 33
+
+2E: C231   if (R[2] == 0) goto 31         if(2 == 0) go to 31
+2F: 4BBF   R[B] <- R[B] ^ R[F]            B = B ^ F
+30: C033   goto 33                        if (R0 = 0) go to 33
+
+31: C333   if (R[3] == 0) goto 33         if(3 == 0) go to 33
+32: 4CCF   R[C] <- R[C] ^ R[F]            C = C ^ F
+
+
+33: 9AFF   write R[A]                     print RA
+34: 9BFF   write R[B]                     print RB
+35: 9CFF   write R[C]                     print RC
+36: 9DFF   write R[D]                     print RD
+
+37: C011   goto 11                        if(R0 = 0) go to 11
+
+38: 0000   halt                          
